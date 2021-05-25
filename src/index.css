@@ -1,0 +1,14 @@
+body {
+    background: no-repeat  url('./images/onyame.png');
+    background-size: cover;
+}
+ul {
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+.vdv {
+    max-width: 900px;
+    margin: 0 auto;
+}

@@ -25,7 +25,7 @@ export type UserItem = {
 }
 export type UserActionType = FetchUsersAction | FetchUsersSuccessAction | FetchUsersErrorAction
 export interface IState {
-    users: Array<UserItem>
+    users: Array<UserItem | []>
     loading: boolean
     error: boolean
 }

@@ -1,9 +1,9 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect} from "react";
 import {useTypedSelector} from "../../hooks/UseTypedSelector";
 import {FetchUsers} from "../../store/action-creators/user";
 import {useDispatch} from "react-redux";
-import {UserItem} from "../../types/userReducerTypes";
-import {log} from "util";
+
+import {ProductList} from "../ProductList/ProductList";
 
 export const App: React.FC = () => {
     const dispatch = useDispatch();
@@ -15,25 +15,7 @@ export const App: React.FC = () => {
     }, [error])
     return (
         <div>
-            <ProductList />
-        </div>
-    )
-}
-const ProductList: React.FC = () => {
-    const {users} = useTypedSelector(state => state.user);
-    const ref = useRef(null);
-    const renderItems = (arr: Array<UserItem>) => {
-        const newList: Array<UserItem> = [];
-        for (let i = 0; i < 10; i++) {
-            newList.push(arr[i])
-        }
-        return newList;
-    }
-    return (
-        <div ref={ref}>
-            {renderItems(users).map(e => {
-                return e && <div key={e.id}>{e.id} {e.product}</div>
-            })}
+            <ProductList users={users}/>
         </div>
     )
 }
