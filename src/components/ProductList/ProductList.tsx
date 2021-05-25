@@ -32,8 +32,9 @@ export const ProductList: React.FC<IProductList> = ({users}) => {
 
     const switchTab = (e: any) => {
         const clickPage = Number(e.target.lastChild.data)
-        setRenderTo(quantityItems*selectedPage)
         setSelectedPage(() => clickPage)
+        setRenderTo(() => quantityItems*clickPage)
+        
     }
 
     const vdv = useMemo(() => tabsRender(users), [users, renderItems])
