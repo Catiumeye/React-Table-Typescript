@@ -1,4 +1,4 @@
-import {IState, UserActions, UserActionType} from "../../types/userReducerTypes";
+import {IState, UserActions, UserActionType, UserItem} from "../../types/userReducerTypes";
 
 const initState: IState = {
     loading: false,
@@ -21,7 +21,7 @@ export const userReducer = (state = initState, action: UserActionType) => {
 
 export const FetchUsersAction = ():UserActionType => ({type: UserActions.FETCH_USERS})
 export const FetchUsersErrorAction = ():UserActionType => ({type: UserActions.FETCH_USERS_ERROR})
-export const FetchUsersSuccessAction = (payload: Array<object>):UserActionType => ({
+export const FetchUsersSuccessAction = (payload: Array<UserItem>):UserActionType => ({
     type: UserActions.FETCH_USERS_SUCCESS,
     payload
 })

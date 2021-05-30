@@ -1,8 +1,6 @@
-import React, {useEffect, useMemo, useState} from "react";
-// import {useTypedSelector} from "../../hooks/UseTypedSelector";
+import React, {useEffect, useState} from "react";
 import {UserItem} from "../../types/userReducerTypes";
-import pageStyles from "../../styles/pagination.module.css";
-import DeleteIcon from "@material-ui/icons/Delete";
+import './Pagination.scss';
 
 interface IProductList {
     users: Array<UserItem>
@@ -10,7 +8,7 @@ interface IProductList {
 
 export const ProductList: React.FC<IProductList> = ({users}) => {
     const [quantityItems, setQuantityItems] = useState<number>(20);
-    const [quantityPages, setQuantityPages] = useState<number | null>(null);
+    const [quantityPages, setQuantityPages] = useState<number>(0);
     const [selectedPage, setSelectedPage] = useState<number>(1);
     const [renderTo, setRenderTo] = useState<number>(20);
 
@@ -18,10 +16,6 @@ export const ProductList: React.FC<IProductList> = ({users}) => {
         setQuantityPages(() => users.length/quantityItems)
     }, [users])
     
-    const tabsRender = (list: Array<UserItem>) => {
-        return renderItems(users, renderTo - quantityItems, renderTo)
-    }
-
     const renderItems = (arr: Array<UserItem>, from: number, to: number) => {
         const newList: Array<UserItem> = [];
         for (from; from < to; from++) {
@@ -37,21 +31,20 @@ export const ProductList: React.FC<IProductList> = ({users}) => {
         
     }
 
-    const vdv = useMemo(() => tabsRender(users), [users, renderItems])
     return (
-        <div>
-            <ul className={pageStyles.paginationUl}>
-                <li className={pageStyles.paginationLi} onClick={(e) => switchTab(e)}>
-                    {selectedPage-2 <= 0 ? 1 : selectedPage-2}</li>
-                <li className={pageStyles.paginationLi} onClick={(e) => switchTab(e)}>
-                    {selectedPage-1 <= 0 ? 1 : selectedPage-1}</li>
-                <li className={pageStyles.paginationLi} onClick={(e) => switchTab(e)}>{selectedPage}</li>
-                <li className={pageStyles.paginationLi} onClick={(e) => switchTab(e)}>{selectedPage+1}</li>
-                <li className={pageStyles.paginationLi} onClick={(e) => switchTab(e)}>{selectedPage+2}</li>
+        <div className='container'>
+            <ul className='pagination'>
+                {selectedPage - 2 >= 1 && <li className='pagination__item' onClick={(e) => switchTab(e)}>{selectedPage-2}</li>}
+                {selectedPage - 1 >= 1 && <li className='pagination__item' onClick={(e) => switchTab(e)}>{selectedPage-1}</li>}
+                <li className='pagination__item pagination__item_selected' onClick={(e) => switchTab(e)}>{selectedPage}</li>
+                {selectedPage < quantityPages && <li className='pagination__item' onClick={(e) => switchTab(e)}>{selectedPage+1}</li>}
+                {selectedPage + 1 < quantityPages && <li className='pagination__item' onClick={(e) => switchTab(e)}>{selectedPage+2}</li>}
             </ul>
-            {vdv.map(e => {
-                return e && <div key={e.id} className='vdv'>{e.id} {e.product} <DeleteIcon htmlColor='cyan' /></div>
+            <div>
+                {renderItems(users, renderTo - quantityItems, renderTo).map(e => {
+                return e && <div key={e.id}>{e.id} {e.product}</div>
             })}
+            </div>
         </div>
     )
 }

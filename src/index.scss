@@ -4,11 +4,13 @@ body {
 }
 ul {
     padding: 0;
+    margin: 0;
 }
 li {
     list-style: none;
 }
-.vdv {
+.container {
     max-width: 900px;
     margin: 0 auto;
+    background-color: rgba(245, 245, 245, .7);
 }

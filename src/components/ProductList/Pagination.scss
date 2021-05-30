@@ -1,0 +1,17 @@
+$mwidth: 300px;
+
+.pagination {
+    user-select: none;
+    display: flex;
+    width: $mwidth;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+    &__item {
+        &_selected {
+            background-color: rgba(196,183,215, 1);
+        }
+        width: 50px;
+        background-color: rgba(112,86,151, 1);
+    }
+}

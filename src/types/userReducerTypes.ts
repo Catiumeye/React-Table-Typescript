@@ -9,7 +9,7 @@ type FetchUsersAction = {
 }
 type FetchUsersSuccessAction = {
     type: typeof UserActions.FETCH_USERS_SUCCESS
-    payload: Array<object>
+    payload: Array<UserItem>
 }
 type FetchUsersErrorAction = {
     type: typeof UserActions.FETCH_USERS_ERROR
@@ -25,7 +25,7 @@ export type UserItem = {
 }
 export type UserActionType = FetchUsersAction | FetchUsersSuccessAction | FetchUsersErrorAction
 export interface IState {
-    users: Array<UserItem | []>
+    users: Array<UserItem>
     loading: boolean
     error: boolean
 }

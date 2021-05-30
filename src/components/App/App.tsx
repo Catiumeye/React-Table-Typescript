@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import {useTypedSelector} from "../../hooks/UseTypedSelector";
 import {FetchUsers} from "../../store/action-creators/user";
 import {useDispatch} from "react-redux";
-
 import {ProductList} from "../ProductList/ProductList";
 
 export const App: React.FC = () => {
@@ -12,7 +11,8 @@ export const App: React.FC = () => {
     useEffect(() => {
         dispatch(FetchUsers());
         error && dispatch(FetchUsers())
-    }, [error])
+    }, [dispatch, error])
+
     return (
         <div>
             <ProductList users={users}/>
